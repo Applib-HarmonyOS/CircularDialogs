@@ -1,1 +1,1 @@
-include ':app', ':CircularDialog'
+include ':entry', ':circulardialog'

@@ -1,4 +1,5 @@
-apply plugin: 'com.huawei.ohos.library'
+apply plugin: 'com.huawei.ohos.hap'
+apply plugin: 'com.huawei.ohos.decctest'
 ohos {
     compileSdkVersion 5
     defaultConfig {
@@ -16,6 +17,11 @@ ohos {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
     testImplementation 'junit:junit:4.13'
+    ohosTestImplementation 'com.huawei.ohos.testkit:runner:1.0.0.100'
+    implementation project(':circulardialog')
+}
+decc {
+    supportType = ['html','xml']
 }

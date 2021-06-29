@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "CircularDialogs"
+    },
+    {
+      "name": "mainability_description",
+      "value": "Java_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "mainability_HelloWorld",
+      "value": "Circular Dialogs"
+    },
+    {
+      "name": "mainability_Test1",
+      "value": "Common Dialog"
+    },
+    {
+      "name": "mainability_Test2",
+      "value": "Circular Dialog"
+    },
+    {
+      "name": "mainability_Test3",
+      "value": "Circular Dialog - Success"
+    },
+    {
+      "name": "mainability_Test4",
+      "value": "Circular Dialog - Warning"
+    },
+    {
+      "name": "mainability_Test5",
+      "value": "Circular Dialog - Error"
+    },
+    {
+      "name": "mainability_Test6",
+      "value": "Circular Dialog - Scale Animation"
+    },
+    {
+      "name": "mainability_Test7",
+      "value": "Circular Dialog - Slide Animation"
+    },
+    {
+      "name": "mainability_Test8",
+      "value": "Circular Dialog - Custom"
+    },
+    {
+      "name": "mainability_Test9",
+      "value": "Circular Dialog - Custom2"
+    }
+  ]
+}
