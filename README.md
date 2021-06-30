@@ -4,7 +4,7 @@ CircularDialogs is custom Android dialog library to give user feedback about the
 
 ## Screenshots 
 
-![Alt text](https://media.giphy.com/media/26FeUOgHGdlqK5b6E/giphy.gif "Succes")
+![Alt text](https://media.giphy.com/media/26FeUOgHGdlqK5b6E/giphy.gif "Success")
 ![Alt text](https://media.giphy.com/media/d47I14DOMBgSt4tO/giphy.gif "Error")
 ![Alt text](https://media.giphy.com/media/xUNd9R5AkswC22VCs8/giphy.gif "Error")
 
@@ -71,7 +71,7 @@ For Animations
  
  Dialog Type
  
- Right now only three types of dialogs are supported CDConstants.SUCCES, CDConstants.WARNING and CDConstants.ERROR.
+ Right now only three types of dialogs are supported CDConstants.SUCCESS, CDConstants.WARNING and CDConstants.ERROR.
  see the top example for usage.
  
  ### Use your own icon

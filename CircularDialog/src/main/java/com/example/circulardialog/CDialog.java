@@ -29,24 +29,27 @@ public class CDialog extends CommonDialog {
     final Context context;
     final Component component;
     final Component dialog;
-
+    final Text messageText;
+    final Image image;
     AnimatorProperty enterAnimatorProperty;
     AnimatorProperty exitAnimatorProperty;
+    int size = DEFAULT_SIZE;
     private int animation;
     private int enterAnimation = SCALE_FROM_TOP;
     private int exitAnimation = SCALE_TO_BOTTOM;
     private int animationDuration = 1500;
 
-    int size = DEFAULT_SIZE;
-    final Text messageText;
-    final Image image;
-
+    /**
+     * Constructor used to create an instance of Circular Dialog.
+     *
+     * @param context Indicates the ohos context.
+     */
     public CDialog(Context context) {
         super(context);
         this.context = context;
 
         setTransparent(true);
-        component = LayoutScatter.getInstance(context).parse(ResourceTable.Layout_simple_text, null,true);
+        component = LayoutScatter.getInstance(context).parse(ResourceTable.Layout_simple_text, null, true);
         dialog = component.findComponentById(ResourceTable.Id_rl);
         messageText = (Text) component.findComponentById(ResourceTable.Id_msg);
         image = (Image) component.findComponentById(ResourceTable.Id_icn);
@@ -54,28 +57,72 @@ public class CDialog extends CommonDialog {
         super.setContentCustomComponent(component);
     }
 
+    /**
+     * Returns the duration set for animation.
+     *
+     * @return Animation duration (in ms).
+     */
     public int getAnimationDuration() {
         return animationDuration;
     }
 
+    /**
+     * Set duration for animation.
+     *
+     * @param animationDuration Indicates the duration for animation (in ms).
+     * @return Returns the CDialog object for continuous operations.
+     */
+    public CDialog setAnimationDuration(int animationDuration) {
+        this.animationDuration = animationDuration;
+        return this;
+    }
+
+    /**
+     * Returns width of the circular dialog.
+     *
+     * @return Width of the circular dialog, in units of pixels.
+     */
     public int getWidth() {
         return dialog.getWidth();
     }
 
+    /**
+     * Returns height of the circular dialog.
+     *
+     * @return Height of the circular dialog, in units of pixels.
+     */
     public int getHeight() {
         return dialog.getHeight();
     }
 
+    /**
+     * Returns the text for the dialog.
+     *
+     * @return Text object for the dialog.
+     */
     public Text getMessageText() {
         return messageText;
     }
 
+    /**
+     * Returns the image for the dialog.
+     *
+     * @return Image object for the dialog.
+     */
     public Image getImage() {
         return image;
     }
 
+    /**
+     * Creates a Alert circular dialog.
+     *
+     * @param message   Message to be displayed.
+     * @param alertType Type of alert (SUCCESS/WARNING/ERROR)
+     * @param givenSize Size of alert (MEDIUM/LARGE)
+     * @return Returns the CDialog object for continuous operations.
+     */
     public CDialog createAlert(String message, int alertType, int givenSize) {
-        switch(givenSize){
+        switch (givenSize) {
             case MEDIUM:
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_medium_dialog).getInteger();
@@ -101,8 +148,17 @@ public class CDialog extends CommonDialog {
         return this;
     }
 
+    /**
+     * Creates a Alert circular dialog.
+     *
+     * @param message   Message to be displayed.
+     * @param icon      PixelMap to be displayed.
+     * @param alertType Type of alert (SUCCESS/WARNING/ERROR)
+     * @param givenSize Size of alert (MEDIUM/LARGE)
+     * @return Returns the CDialog object for continuous operations.
+     */
     public CDialog createAlert(String message, PixelMap icon, int alertType, int givenSize) {
-        switch(givenSize){
+        switch (givenSize) {
             case MEDIUM:
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_medium_dialog).getInteger();
@@ -129,12 +185,18 @@ public class CDialog extends CommonDialog {
         return this;
     }
 
+    /**
+     * Sets an alert type for the circular dialog.
+     *
+     * @param alertType Value for alert type (SUCCESS/WARNING/ERROR).
+     * @return Returns the CDialog object for continuous operations.
+     */
     public CDialog setAlertType(int alertType) {
         messageText.setTextColor(Color.WHITE);
         ShapeElement shapeElement = (ShapeElement) dialog.getBackgroundElement();
         int colorResID = 0;
 
-        switch(alertType){
+        switch (alertType) {
             case SUCCESS:
                 // success icon
                 image.setPixelMap(getPixelMap(ResourceTable.Media_success));
@@ -155,8 +217,6 @@ public class CDialog extends CommonDialog {
         }
 
 
-
-
         try {
             int color = context.getResourceManager().getElement(colorResID).getColor();
             shapeElement.setRgbColor(RgbColor.fromArgbInt(color));
@@ -167,29 +227,71 @@ public class CDialog extends CommonDialog {
         return this;
     }
 
+    /**
+     * Returns the background color of the circular dialog.
+     *
+     * @return RgbColor representing the background color.
+     */
     public RgbColor getBackgroundColor() {
         ShapeElement shapeElement = (ShapeElement) dialog.getBackgroundElement();
         return shapeElement.getRgbColors()[0];
     }
 
+    /**
+     * Sets the background color of the circular dialog.
+     *
+     * @param color RgbColor representing the background color.
+     * @return Returns the CDialog object for continuous operations.
+     */
+    public CDialog setBackgroundColor(RgbColor color) {
+        ShapeElement shapeElement = (ShapeElement) dialog.getBackgroundElement();
+        shapeElement.setRgbColor(color);
+        return this;
+    }
+
+    /**
+     * Sets the text to be displayed in the content area.
+     *
+     * @param text Indicates the text information to display in the content area.
+     * @return Returns the CDialog object for continuous operations.
+     */
     @Override
     public CDialog setContentText(String text) {
         messageText.setText(text);
         return this;
     }
 
+    /**
+     * Sets the icon to be displayed in the content area.
+     *
+     * @param resId Indicates the resource id of the content to be displayed.
+     * @return Returns the CDialog object for continuous operations.
+     */
     @Override
     public CDialog setContentImage(int resId) {
         image.setPixelMap(resId);
         return this;
     }
 
+    /**
+     * Sets the size of the dialog box.
+     *
+     * @param width  Indicates the expected width of the dialog box.
+     * @param height Indicates the expected height of the dialog box.
+     * @return Returns the CDialog object for continuous operations.
+     */
     @Override
     public CDialog setSize(int width, int height) {
         dialog.setComponentSize(width, height);
         return this;
     }
 
+    /**
+     * Sets the text size for the display message.
+     *
+     * @param textSize Value of text size (NORMAL_TEXT_SIZE/LARGE_TEXT_SIZE/EXTRA_LARGE_TEXT_SIZE).
+     * @return Returns the CDialog object for continuous operations.
+     */
     public CDialog setTextSize(int textSize) {
         switch (textSize) {
             case NORMAL_TEXT_SIZE:
@@ -218,6 +320,12 @@ public class CDialog extends CommonDialog {
         return this;
     }
 
+    /**
+     * Construct a PixelMap from a resource ID.
+     *
+     * @param resID Indicates the resource ID.
+     * @return PixelMap image represented by the resource ID.
+     */
     private PixelMap getPixelMap(int resID) {
         RawFileEntry assetManager = null;
         try {
@@ -240,10 +348,21 @@ public class CDialog extends CommonDialog {
         return source.createPixelmap(decodingOptions);
     }
 
+    /**
+     * Returns the type of animation.
+     *
+     * @return Type of animation.
+     */
     public int getAnimation() {
         return animation;
     }
 
+    /**
+     * Sets the animation to be followed by the circular dialog.
+     *
+     * @param animation Type of animation (e.g. SCALE_FROM_LEFT_TO_RIGHT).
+     * @return Returns the CDialog object for continuous operations.
+     */
     public CDialog setAnimation(int animation) {
         this.animation = animation;
         switch (animation) {
@@ -414,6 +533,9 @@ public class CDialog extends CommonDialog {
         return this;
     }
 
+    /**
+     * Sets the type of enter animation.
+     */
     private void setEnterAnimation() {
         int centerX = dialog.getWidth() / 2;
         int centerY = dialog.getHeight() / 2;
@@ -447,7 +569,7 @@ public class CDialog extends CommonDialog {
                 enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SLIDE_FROM_LEFT:
-                dialog.setPivot(-8 *  displayWidth, centerY);
+                dialog.setPivot(-8 * displayWidth, centerY);
                 enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SLIDE_FROM_RIGHT:
@@ -462,6 +584,9 @@ public class CDialog extends CommonDialog {
         }
     }
 
+    /**
+     * Sets the type of exit animation.
+     */
     private void setExitAnimation() {
         int centerX = dialog.getWidth() / 2;
         int centerY = dialog.getHeight() / 2;
@@ -499,7 +624,7 @@ public class CDialog extends CommonDialog {
                 exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
                 break;
             case SLIDE_TO_RIGHT:
-                dialog.setPivot(8 *  displayWidth, centerY);
+                dialog.setPivot(8 * displayWidth, centerY);
                 exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
                 break;
 
@@ -510,11 +635,12 @@ public class CDialog extends CommonDialog {
         }
     }
 
-    public CDialog setAnimationDuration(int animationDuration) {
-        this.animationDuration = animationDuration;
-        return this;
-    }
-
+    /**
+     * Sets the alignment for the circular dialog.
+     *
+     * @param alignment Indicates the alignment mode.
+     * @return Returns the CDialog object for continuous operations.
+     */
     @Override
     public CDialog setAlignment(int alignment) {
         DependentLayout.LayoutConfig dialogLayoutConfig = (DependentLayout.LayoutConfig) dialog.getLayoutConfig();
@@ -535,16 +661,23 @@ public class CDialog extends CommonDialog {
         return this;
     }
 
+    /**
+     * Sets the position of the circular dialog.
+     *
+     * @param alignment Indicates the alignment mode.
+     * @return Returns the CDialog object for continuous operations.
+     */
     public CDialog setPosition(int alignment) {
         return setAlignment(alignment);
     }
 
-    public CDialog setBackgroundColor(RgbColor color) {
-        ShapeElement shapeElement = (ShapeElement) dialog.getBackgroundElement();
-        shapeElement.setRgbColor(color);
-        return this;
-    }
-
+    /**
+     * Sets the background dimness for the dialog duration.
+     *
+     * @param window Window object of the screen.
+     * @param alpha  Dim value.
+     * @return Returns the CDialog object for continuous operations.
+     */
     public CDialog setBackDimness(Window window, float alpha) {
         if (window.getLayoutConfig().isPresent()) {
             WindowManager.LayoutConfig layoutConfig = window.getLayoutConfig().get();

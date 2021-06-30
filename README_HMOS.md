@@ -4,13 +4,13 @@ CircularDialogs is custom HarmonyOS dialog library to give user feedback about t
 
 ## Screenshots
 
-![Success](Screenshot_success.png "Succes")
+![Success](Screenshot_success.png "Success")
 ![Error](Screenshot_error.png "Error")
 ![Warning](Screenshot_warning.png "Warning")
 
 ## Example
 
-```Java
+```
 new CDialog(this).createAlert("You missed something",
                 CDConstants.WARNING,                                    // Type of dialog
                 CDConstants.LARGE)                                      //  size of dialog
@@ -29,7 +29,7 @@ Here are the different customizations that you can use to make things look diffe
 Bottom and top can be exchanged as well as right to left.
 Like scale you can also use slide animations, just replace `SCALE` with `SLIDE`.
 
-```Java
+```
      CDConstants.SCALE_FROM_BOTTOM_TO_TOP, 
      CDConstants.SCALE_FROM_RIGHT_TO_LEFT, 
      CDConstants.SLIDE_FROM_BOTTOM_TO_TOP
@@ -39,7 +39,7 @@ Like scale you can also use slide animations, just replace `SCALE` with `SLIDE`.
 
 Text size can be `NORMAL_TEXT_SIZE`, `LARGE_TEXT_SIZE` or `EXTRA_LARGE_TEXT_SIZE`.
 
-```Java
+```
     setTextSize(CDConstants.NORMAL_TEXT_SIZE);
 ```
 
@@ -51,6 +51,6 @@ Right now only three types of dialogs are supported `CDConstants.SUCCESS`, `CDCo
 
 You can use your own icons if you want. Here is the way :
 
-```Java
+```
     CDialog createAlert(String message, PixelMap icon, int alertType, int size); 
 ```

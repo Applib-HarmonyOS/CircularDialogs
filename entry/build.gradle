@@ -13,7 +13,7 @@ ohos {
             }
         }
     }
-    
+
 }
 
 dependencies {
@@ -23,5 +23,5 @@ dependencies {
     implementation project(':circulardialog')
 }
 decc {
-    supportType = ['html','xml']
+    supportType = ['html', 'xml']
 }
