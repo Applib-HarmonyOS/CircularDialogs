@@ -1,14 +1,68 @@
 package com.example.circulardialog;
 
+import static com.example.circulardialog.extras.CDConstants.DEFAULT_SIZE;
+import static com.example.circulardialog.extras.CDConstants.ERROR;
+import static com.example.circulardialog.extras.CDConstants.EXTRA_LARGE_TEXT_SIZE;
+import static com.example.circulardialog.extras.CDConstants.LARGE;
+import static com.example.circulardialog.extras.CDConstants.LARGE_TEXT_SIZE;
+import static com.example.circulardialog.extras.CDConstants.MEDIUM;
+import static com.example.circulardialog.extras.CDConstants.NORMAL_TEXT_SIZE;
+import static com.example.circulardialog.extras.CDConstants.POSITION_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.POSITION_TOP;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_BOTTOM_TO_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_BOTTOM_TO_TOP;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_CENTER;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_CENTER_TO_CENTER;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_LEFT_TO_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_LEFT_TO_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_RIGHT_TO_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_RIGHT_TO_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_TOP;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_TOP_TO_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SCALE_FROM_TOP_TO_TOP;
+import static com.example.circulardialog.extras.CDConstants.SCALE_TO_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SCALE_TO_CENTER;
+import static com.example.circulardialog.extras.CDConstants.SCALE_TO_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_TO_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SCALE_TO_TOP;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_BOTTOM_TO_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_BOTTOM_TO_TOP;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_LEFT_TO_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_LEFT_TO_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_RIGHT_TO_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_RIGHT_TO_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_TOP;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_TOP_TO_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_FROM_TOP_TO_TOP;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_TO_BOTTOM;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_TO_LEFT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_TO_RIGHT;
+import static com.example.circulardialog.extras.CDConstants.SLIDE_TO_TOP;
+import static com.example.circulardialog.extras.CDConstants.SUCCESS;
+import static com.example.circulardialog.extras.CDConstants.WARNING;
+
+import java.io.IOException;
+import java.util.Optional;
 import ohos.agp.animation.Animator;
 import ohos.agp.animation.AnimatorGroup;
 import ohos.agp.animation.AnimatorProperty;
 import ohos.agp.colors.RgbColor;
-import ohos.agp.components.*;
+import ohos.agp.components.Component;
+import ohos.agp.components.DependentLayout;
+import ohos.agp.components.Image;
+import ohos.agp.components.LayoutScatter;
+import ohos.agp.components.Text;
 import ohos.agp.components.element.ShapeElement;
 import ohos.agp.utils.Color;
 import ohos.agp.utils.LayoutAlignment;
 import ohos.agp.window.dialog.CommonDialog;
+import ohos.agp.window.service.Display;
 import ohos.agp.window.service.DisplayManager;
 import ohos.agp.window.service.Window;
 import ohos.agp.window.service.WindowManager;
@@ -21,10 +75,10 @@ import ohos.media.image.ImageSource;
 import ohos.media.image.PixelMap;
 import ohos.media.image.common.Size;
 
-import java.io.IOException;
 
-import static com.example.circulardialog.extras.CDConstants.*;
-
+/**
+ * Creates a circular dialog.
+ */
 public class CDialog extends CommonDialog {
     final Context context;
     final Component component;
@@ -132,6 +186,7 @@ public class CDialog extends CommonDialog {
                 break;
 
             case LARGE:
+            default:
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_large_dialog).getInteger();
                 } catch (IOException | NotExistException | WrongTypeException e) {
@@ -168,6 +223,7 @@ public class CDialog extends CommonDialog {
                 break;
 
             case LARGE:
+            default:
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_large_dialog).getInteger();
                 } catch (IOException | NotExistException | WrongTypeException e) {
@@ -194,31 +250,33 @@ public class CDialog extends CommonDialog {
     public CDialog setAlertType(int alertType) {
         messageText.setTextColor(Color.WHITE);
         ShapeElement shapeElement = (ShapeElement) dialog.getBackgroundElement();
-        int colorResID = 0;
+        int colorResId;
 
         switch (alertType) {
             case SUCCESS:
                 // success icon
                 image.setPixelMap(getPixelMap(ResourceTable.Media_success));
-                colorResID = ResourceTable.Color_colorSuccess;
+                colorResId = ResourceTable.Color_colorSuccess;
                 break;
 
             case WARNING:
                 // warning icon
                 image.setPixelMap(getPixelMap(ResourceTable.Media_warning));
-                colorResID = ResourceTable.Color_colorWarning;
+                colorResId = ResourceTable.Color_colorWarning;
                 break;
 
             case ERROR:
                 // error icon
                 image.setPixelMap(getPixelMap(ResourceTable.Media_error));
-                colorResID = ResourceTable.Color_colorError;
+                colorResId = ResourceTable.Color_colorError;
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + alertType);
         }
 
 
         try {
-            int color = context.getResourceManager().getElement(colorResID).getColor();
+            int color = context.getResourceManager().getElement(colorResId).getColor();
             shapeElement.setRgbColor(RgbColor.fromArgbInt(color));
         } catch (IOException | WrongTypeException | NotExistException e) {
             e.printStackTrace();
@@ -294,23 +352,27 @@ public class CDialog extends CommonDialog {
      */
     public CDialog setTextSize(int textSize) {
         switch (textSize) {
-            case NORMAL_TEXT_SIZE:
-                try {
-                    messageText.setTextSize(context.getResourceManager().getElement(ResourceTable.Integer_normal_text).getInteger());
-                } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
-                }
-                break;
             case LARGE_TEXT_SIZE:
                 try {
-                    messageText.setTextSize(context.getResourceManager().getElement(ResourceTable.Integer_large_text).getInteger());
+                    messageText.setTextSize(context.getResourceManager()
+                            .getElement(ResourceTable.Integer_large_text).getInteger());
                 } catch (IOException | NotExistException | WrongTypeException e) {
                     e.printStackTrace();
                 }
                 break;
             case EXTRA_LARGE_TEXT_SIZE:
                 try {
-                    messageText.setTextSize(context.getResourceManager().getElement(ResourceTable.Integer_extra_large_text).getInteger());
+                    messageText.setTextSize(context.getResourceManager()
+                            .getElement(ResourceTable.Integer_extra_large_text).getInteger());
+                } catch (IOException | NotExistException | WrongTypeException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case NORMAL_TEXT_SIZE:
+            default:
+                try {
+                    messageText.setTextSize(context.getResourceManager()
+                            .getElement(ResourceTable.Integer_normal_text).getInteger());
                 } catch (IOException | NotExistException | WrongTypeException e) {
                     e.printStackTrace();
                 }
@@ -323,13 +385,14 @@ public class CDialog extends CommonDialog {
     /**
      * Construct a PixelMap from a resource ID.
      *
-     * @param resID Indicates the resource ID.
+     * @param resId Indicates the resource ID.
      * @return PixelMap image represented by the resource ID.
      */
-    private PixelMap getPixelMap(int resID) {
+    private PixelMap getPixelMap(int resId) {
         RawFileEntry assetManager = null;
         try {
-            assetManager = context.getResourceManager().getRawFileEntry(context.getResourceManager().getMediaPath(resID));
+            assetManager = context.getResourceManager()
+                    .getRawFileEntry(context.getResourceManager().getMediaPath(resId));
         } catch (IOException | NotExistException | WrongTypeException e) {
             e.printStackTrace();
         }
@@ -449,6 +512,7 @@ public class CDialog extends CommonDialog {
         enterAnimatorProperty.setStateChangedListener(new Animator.StateChangedListener() {
             @Override
             public void onStart(Animator animator) {
+                // No action.
             }
 
             @Override
@@ -466,29 +530,29 @@ public class CDialog extends CommonDialog {
 
             @Override
             public void onCancel(Animator animator) {
-
+                // No action.
             }
 
             @Override
             public void onEnd(Animator animator) {
-
+                // No action.
             }
 
             @Override
             public void onPause(Animator animator) {
-
+                // No action.
             }
 
             @Override
             public void onResume(Animator animator) {
-
+                // No action.
             }
         });
 
         exitAnimatorProperty.setStateChangedListener(new Animator.StateChangedListener() {
             @Override
             public void onStart(Animator animator) {
-
+                // No action.
             }
 
             @Override
@@ -498,22 +562,22 @@ public class CDialog extends CommonDialog {
 
             @Override
             public void onCancel(Animator animator) {
-
+                // No action.
             }
 
             @Override
             public void onEnd(Animator animator) {
-
+                // No action.
             }
 
             @Override
             public void onPause(Animator animator) {
-
+                // No action.
             }
 
             @Override
             public void onResume(Animator animator) {
-
+                // No action.
             }
         });
 
@@ -525,6 +589,7 @@ public class CDialog extends CommonDialog {
 
             @Override
             public void onComponentUnboundFromWindow(Component component) {
+                // No action.
             }
         });
 
@@ -539,47 +604,61 @@ public class CDialog extends CommonDialog {
     private void setEnterAnimation() {
         int centerX = dialog.getWidth() / 2;
         int centerY = dialog.getHeight() / 2;
-        int displayWidth = DisplayManager.getInstance().getDefaultDisplay(context).get().getAttributes().width;
-        int displayHeight = DisplayManager.getInstance().getDefaultDisplay(context).get().getAttributes().height;
+        int displayWidth = 1000;
+        int displayHeight = 1000;
+        Optional<Display> defaultDisplay = DisplayManager.getInstance().getDefaultDisplay(context);
+        if (defaultDisplay.isPresent()) {
+            displayWidth = defaultDisplay.get().getAttributes().width;
+            displayHeight = defaultDisplay.get().getAttributes().height;
+        }
 
         switch (enterAnimation) {
             case SCALE_FROM_BOTTOM:
                 dialog.setPivot(centerX, 0.5f * displayHeight);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SCALE_FROM_TOP:
                 dialog.setPivot(centerX, -0.5f * displayHeight);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SCALE_FROM_LEFT:
                 dialog.setPivot(-0.5f * displayWidth, centerY);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SCALE_FROM_RIGHT:
                 dialog.setPivot(0.5f * displayWidth, centerY);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
                 break;
 
             case SLIDE_FROM_BOTTOM:
-                dialog.setPivot(centerX, 8 * displayHeight);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
+                dialog.setPivot(centerX, 8f * displayHeight);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SLIDE_FROM_TOP:
-                dialog.setPivot(centerX, -8 * displayHeight);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
+                dialog.setPivot(centerX, -8f * displayHeight);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SLIDE_FROM_LEFT:
-                dialog.setPivot(-8 * displayWidth, centerY);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
+                dialog.setPivot(-8f * displayWidth, centerY);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
                 break;
             case SLIDE_FROM_RIGHT:
-                dialog.setPivot(8 * displayWidth, centerY);
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
+                dialog.setPivot(8f * displayWidth, centerY);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.9f).scaleYFrom(0.9f).scaleX(1.0f).scaleY(1.0f);
                 break;
 
             case SCALE_FROM_CENTER:
             default:
-                enterAnimatorProperty.setDuration(animationDuration).scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
+                enterAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(0.0f).scaleYFrom(0.0f).scaleX(1.0f).scaleY(1.0f);
                 break;
         }
     }
@@ -590,47 +669,61 @@ public class CDialog extends CommonDialog {
     private void setExitAnimation() {
         int centerX = dialog.getWidth() / 2;
         int centerY = dialog.getHeight() / 2;
-        int displayWidth = DisplayManager.getInstance().getDefaultDisplay(context).get().getAttributes().width;
-        int displayHeight = DisplayManager.getInstance().getDefaultDisplay(context).get().getAttributes().height;
+        int displayWidth = 1000;
+        int displayHeight = 1000;
+        Optional<Display> defaultDisplay = DisplayManager.getInstance().getDefaultDisplay(context);
+        if (defaultDisplay.isPresent()) {
+            displayWidth = defaultDisplay.get().getAttributes().width;
+            displayHeight = defaultDisplay.get().getAttributes().height;
+        }
 
         switch (exitAnimation) {
             case SCALE_TO_BOTTOM:
                 dialog.setPivot(centerX, 0.5f * displayHeight);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
                 break;
             case SCALE_TO_TOP:
                 dialog.setPivot(centerX, -0.5f * displayHeight);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
                 break;
             case SCALE_TO_LEFT:
                 dialog.setPivot(-0.5f * displayWidth, centerY);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
                 break;
             case SCALE_TO_RIGHT:
                 dialog.setPivot(0.5f * displayWidth, centerY);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
                 break;
 
             case SLIDE_TO_BOTTOM:
-                dialog.setPivot(centerX, 8 * displayHeight);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
+                dialog.setPivot(centerX, 8f * displayHeight);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
                 break;
             case SLIDE_TO_TOP:
-                dialog.setPivot(centerX, -8 * displayHeight);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
+                dialog.setPivot(centerX, -8f * displayHeight);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
                 break;
             case SLIDE_TO_LEFT:
-                dialog.setPivot(-8 * displayWidth, centerY);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
+                dialog.setPivot(-8f * displayWidth, centerY);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
                 break;
             case SLIDE_TO_RIGHT:
-                dialog.setPivot(8 * displayWidth, centerY);
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
+                dialog.setPivot(8f * displayWidth, centerY);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.9f).scaleY(0.9f);
                 break;
 
             case SCALE_TO_CENTER:
             default:
-                exitAnimatorProperty.setDuration(animationDuration).scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
+                exitAnimatorProperty.setDuration(animationDuration)
+                        .scaleXFrom(1.0f).scaleYFrom(1.0f).scaleX(0.0f).scaleY(0.0f);
                 break;
         }
     }
@@ -656,6 +749,8 @@ public class CDialog extends CommonDialog {
                 dialogLayoutConfig.removeRule(DependentLayout.LayoutConfig.CENTER_IN_PARENT);
                 dialogLayoutConfig.addRule(DependentLayout.LayoutConfig.ALIGN_PARENT_TOP);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + alignment);
         }
         dialog.setLayoutConfig(dialogLayoutConfig);
         return this;
@@ -679,8 +774,10 @@ public class CDialog extends CommonDialog {
      * @return Returns the CDialog object for continuous operations.
      */
     public CDialog setBackDimness(Window window, float alpha) {
-        if (window.getLayoutConfig().isPresent()) {
-            WindowManager.LayoutConfig layoutConfig = window.getLayoutConfig().get();
+        Optional<WindowManager.LayoutConfig> layoutConfigOptional = window.getLayoutConfig();
+
+        if (layoutConfigOptional.isPresent()) {
+            WindowManager.LayoutConfig layoutConfig = layoutConfigOptional.get();
             float previousAlpha = layoutConfig.alpha;
             layoutConfig.alpha = alpha;
             window.setLayoutConfig(layoutConfig);

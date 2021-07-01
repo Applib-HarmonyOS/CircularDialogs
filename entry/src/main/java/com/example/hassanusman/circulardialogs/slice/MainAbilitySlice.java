@@ -3,6 +3,7 @@ package com.example.hassanusman.circulardialogs.slice;
 import com.example.circulardialog.CDialog;
 import com.example.circulardialog.extras.CDConstants;
 import com.example.hassanusman.circulardialogs.ResourceTable;
+import java.io.IOException;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.colors.RgbColor;
@@ -15,8 +16,9 @@ import ohos.media.image.ImageSource;
 import ohos.media.image.PixelMap;
 import ohos.media.image.common.Size;
 
-import java.io.IOException;
-
+/**
+ * MainAbilitySlice class for sample app.
+ */
 public class MainAbilitySlice extends AbilitySlice {
     @Override
     public void onStart(Intent intent) {
@@ -24,39 +26,37 @@ public class MainAbilitySlice extends AbilitySlice {
         super.setUIContent(ResourceTable.Layout_ability_main);
 
         Button btn2 = (Button) findComponentById(ResourceTable.Id_test2_btn);
-        Button btn3 = (Button) findComponentById(ResourceTable.Id_test3_btn);
-        Button btn4 = (Button) findComponentById(ResourceTable.Id_test4_btn);
-        Button btn5 = (Button) findComponentById(ResourceTable.Id_test5_btn);
-        Button btn6 = (Button) findComponentById(ResourceTable.Id_test6_btn);
-        Button btn7 = (Button) findComponentById(ResourceTable.Id_test7_btn);
-        Button btn8 = (Button) findComponentById(ResourceTable.Id_test8_btn);
-        Button btn9 = (Button) findComponentById(ResourceTable.Id_test9_btn);
-
         btn2.setClickedListener(component -> new CDialog(MainAbilitySlice.this).show());
 
+        Button btn3 = (Button) findComponentById(ResourceTable.Id_test3_btn);
         btn3.setClickedListener(component -> new CDialog(MainAbilitySlice.this)
                 .createAlert("Success", CDConstants.SUCCESS, CDConstants.LARGE)
                 .show());
 
+        Button btn4 = (Button) findComponentById(ResourceTable.Id_test4_btn);
         btn4.setClickedListener(component -> new CDialog(MainAbilitySlice.this)
                 .createAlert("Warning", CDConstants.WARNING, CDConstants.LARGE)
                 .show());
 
+        Button btn5 = (Button) findComponentById(ResourceTable.Id_test5_btn);
         btn5.setClickedListener(component -> new CDialog(MainAbilitySlice.this)
                 .createAlert("Error", CDConstants.ERROR, CDConstants.LARGE)
                 .show());
 
+        Button btn6 = (Button) findComponentById(ResourceTable.Id_test6_btn);
         btn6.setClickedListener(component -> new CDialog(MainAbilitySlice.this)
                 .createAlert("Scale Animation", CDConstants.SUCCESS, CDConstants.MEDIUM)
                 .setAnimation(CDConstants.SCALE_FROM_TOP_TO_BOTTOM)
                 .show());
 
+        Button btn7 = (Button) findComponentById(ResourceTable.Id_test7_btn);
         btn7.setClickedListener(component -> new CDialog(MainAbilitySlice.this)
                 .createAlert("Slide Animation", CDConstants.SUCCESS, CDConstants.MEDIUM)
                 .setAlertType(CDConstants.ERROR)
                 .setAnimation(CDConstants.SLIDE_FROM_LEFT_TO_RIGHT)
                 .show());
 
+        Button btn8 = (Button) findComponentById(ResourceTable.Id_test8_btn);
         btn8.setClickedListener(component -> new CDialog(MainAbilitySlice.this)
                 .setContentText("Custom")
                 .setTextSize(CDConstants.NORMAL_TEXT_SIZE)
@@ -69,6 +69,7 @@ public class MainAbilitySlice extends AbilitySlice {
                 .setBackDimness(getWindow(), 0.4f)
                 .show());
 
+        Button btn9 = (Button) findComponentById(ResourceTable.Id_test9_btn);
         btn9.setClickedListener(component -> new CDialog(MainAbilitySlice.this)
                 .createAlert("Test", getPixelMap(ResourceTable.Media_icon), CDConstants.ERROR, CDConstants.LARGE)
                 .setPosition(CDConstants.POSITION_TOP)
@@ -76,10 +77,10 @@ public class MainAbilitySlice extends AbilitySlice {
 
     }
 
-    private PixelMap getPixelMap(int resID) {
+    private PixelMap getPixelMap(int resId) {
         RawFileEntry assetManager = null;
         try {
-            assetManager = getResourceManager().getRawFileEntry(getResourceManager().getMediaPath(resID));
+            assetManager = getResourceManager().getRawFileEntry(getResourceManager().getMediaPath(resId));
         } catch (IOException | NotExistException | WrongTypeException e) {
             e.printStackTrace();
         }
