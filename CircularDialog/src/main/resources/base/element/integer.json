@@ -1,0 +1,24 @@
+{
+  "integer": [
+    {
+      "name": "medium_dialog",
+      "value": 400
+    },
+    {
+      "name": "large_dialog",
+      "value": 500
+    },
+    {
+      "name": "normal_text",
+      "value": 40
+    },
+    {
+      "name": "large_text",
+      "value": 60
+    },
+    {
+      "name": "extra_large_text",
+      "value": 80
+    }
+  ]
+}

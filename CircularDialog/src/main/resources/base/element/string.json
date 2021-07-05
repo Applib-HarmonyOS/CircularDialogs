@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "CircularDialog"
+    },
+    {
+      "name": "sample_text",
+      "value": "Circular Dialog"
+    }
+  ]
+}

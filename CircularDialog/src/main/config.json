@@ -1,0 +1,30 @@
+{
+  "app": {
+    "bundleName": "com.example.hassanusman.circulardialogs",
+    "vendor": "example",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    },
+    "apiVersion": {
+      "compatible": 5,
+      "target": 5,
+      "releaseType": "Release"
+    }
+  },
+  "deviceConfig": {
+  },
+  "module": {
+    "package": "com.example.circulardialog",
+    "deviceType": [
+      "phone",
+      "tablet",
+      "tv"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "circulardialog",
+      "moduleType": "har"
+    }
+  }
+}

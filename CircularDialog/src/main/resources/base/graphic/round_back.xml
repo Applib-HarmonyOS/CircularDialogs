@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:shape="oval">
+
+    <solid
+        ohos:color="#d3d3d3"/>
+
+    <size
+        ohos:height="100dp"
+        ohos:width="100dp"/>
+</shape>

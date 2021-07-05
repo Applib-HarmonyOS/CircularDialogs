@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "colorSuccess",
+      "value": "#32CD32"
+    },
+    {
+      "name": "colorWarning",
+      "value": "#FF8C00"
+    },
+    {
+      "name": "colorError",
+      "value": "#CC0000"
+    }
+  ]
+}
