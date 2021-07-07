@@ -48,7 +48,7 @@ allprojects {
        configFile file("huawei/config/checkstyle.xml")
   
        source 'entry/src/main/java'
-       source 'CircularDialogs/src/main/java'
+       source 'CircularDialog/src/main/java'
        include '**/*.java'
   
        // empty classpath
@@ -65,7 +65,7 @@ sonarqube {
     property "sonar.projectKey", "applibgroup_CircularDialogs"
     property "sonar.organization", "applibgroup"
     property "sonar.host.url", "https://sonarcloud.io"
-    property "sonar.sources", "entry,CircularDialogs"
-    property "sonar.java.binaries", "entry/build,CircularDialogs/build"
+    property "sonar.sources", "entry,CircularDialog"
+    property "sonar.java.binaries", "entry/build,CircularDialog/build"
   }
 }
