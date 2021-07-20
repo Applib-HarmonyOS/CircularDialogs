@@ -12,6 +12,8 @@ import ohos.global.resource.NotExistException;
 import ohos.global.resource.RawFileEntry;
 import ohos.global.resource.Resource;
 import ohos.global.resource.WrongTypeException;
+import ohos.hiviewdfx.HiLog;
+import ohos.hiviewdfx.HiLogLabel;
 import ohos.media.image.ImageSource;
 import ohos.media.image.PixelMap;
 import ohos.media.image.common.Size;
@@ -20,6 +22,8 @@ import ohos.media.image.common.Size;
  * MainAbilitySlice class for sample app.
  */
 public class MainAbilitySlice extends AbilitySlice {
+    private static final HiLogLabel LABEL_LOG = new HiLogLabel(3, 0xD001100, "MainAbilitySlice");
+
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
@@ -82,7 +86,7 @@ public class MainAbilitySlice extends AbilitySlice {
         try {
             assetManager = getResourceManager().getRawFileEntry(getResourceManager().getMediaPath(resId));
         } catch (IOException | NotExistException | WrongTypeException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
         ImageSource.SourceOptions options = new ImageSource.SourceOptions();
         options.formatHint = "image/png";
@@ -93,7 +97,7 @@ public class MainAbilitySlice extends AbilitySlice {
             assert assetManager != null;
             asset = assetManager.openRawFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
         ImageSource source = ImageSource.create(asset, options);
         return source.createPixelmap(decodingOptions);

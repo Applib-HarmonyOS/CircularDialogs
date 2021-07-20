@@ -71,6 +71,8 @@ import ohos.global.resource.NotExistException;
 import ohos.global.resource.RawFileEntry;
 import ohos.global.resource.Resource;
 import ohos.global.resource.WrongTypeException;
+import ohos.hiviewdfx.HiLog;
+import ohos.hiviewdfx.HiLogLabel;
 import ohos.media.image.ImageSource;
 import ohos.media.image.PixelMap;
 import ohos.media.image.common.Size;
@@ -92,6 +94,7 @@ public class CDialog extends CommonDialog {
     private int enterAnimation = SCALE_FROM_TOP;
     private int exitAnimation = SCALE_TO_BOTTOM;
     private int animationDuration = 1500;
+    private static final HiLogLabel LABEL_LOG = new HiLogLabel(3, 0xD001100, "CDialog");
 
     /**
      * Constructor used to create an instance of Circular Dialog.
@@ -181,7 +184,7 @@ public class CDialog extends CommonDialog {
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_medium_dialog).getInteger();
                 } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
+                    HiLog.error(LABEL_LOG, e.getMessage());
                 }
                 break;
 
@@ -190,7 +193,7 @@ public class CDialog extends CommonDialog {
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_large_dialog).getInteger();
                 } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
+                    HiLog.error(LABEL_LOG, e.getMessage());
                 }
                 break;
         }
@@ -218,7 +221,7 @@ public class CDialog extends CommonDialog {
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_medium_dialog).getInteger();
                 } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
+                    HiLog.error(LABEL_LOG, e.getMessage());
                 }
                 break;
 
@@ -227,7 +230,7 @@ public class CDialog extends CommonDialog {
                 try {
                     size = context.getResourceManager().getElement(ResourceTable.Integer_large_dialog).getInteger();
                 } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
+                    HiLog.error(LABEL_LOG, e.getMessage());
                 }
                 break;
         }
@@ -279,7 +282,7 @@ public class CDialog extends CommonDialog {
             int color = context.getResourceManager().getElement(colorResId).getColor();
             shapeElement.setRgbColor(RgbColor.fromArgbInt(color));
         } catch (IOException | WrongTypeException | NotExistException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
 
         return this;
@@ -357,7 +360,7 @@ public class CDialog extends CommonDialog {
                     messageText.setTextSize(context.getResourceManager()
                             .getElement(ResourceTable.Integer_large_text).getInteger());
                 } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
+                    HiLog.error(LABEL_LOG, e.getMessage());
                 }
                 break;
             case EXTRA_LARGE_TEXT_SIZE:
@@ -365,7 +368,7 @@ public class CDialog extends CommonDialog {
                     messageText.setTextSize(context.getResourceManager()
                             .getElement(ResourceTable.Integer_extra_large_text).getInteger());
                 } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
+                    HiLog.error(LABEL_LOG, e.getMessage());
                 }
                 break;
             case NORMAL_TEXT_SIZE:
@@ -374,7 +377,7 @@ public class CDialog extends CommonDialog {
                     messageText.setTextSize(context.getResourceManager()
                             .getElement(ResourceTable.Integer_normal_text).getInteger());
                 } catch (IOException | NotExistException | WrongTypeException e) {
-                    e.printStackTrace();
+                    HiLog.error(LABEL_LOG, e.getMessage());
                 }
                 break;
         }
@@ -394,7 +397,7 @@ public class CDialog extends CommonDialog {
             assetManager = context.getResourceManager()
                     .getRawFileEntry(context.getResourceManager().getMediaPath(resId));
         } catch (IOException | NotExistException | WrongTypeException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
         ImageSource.SourceOptions options = new ImageSource.SourceOptions();
         options.formatHint = "image/png";
@@ -405,7 +408,7 @@ public class CDialog extends CommonDialog {
             assert assetManager != null;
             asset = assetManager.openRawFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
         ImageSource source = ImageSource.create(asset, options);
         return source.createPixelmap(decodingOptions);
@@ -593,7 +596,7 @@ public class CDialog extends CommonDialog {
             }
         });
 
-        dialog.setClickedListener(component -> exitAnimatorProperty.start());
+        dialog.setClickedListener(componentClickedListener -> exitAnimatorProperty.start());
 
         return this;
     }
