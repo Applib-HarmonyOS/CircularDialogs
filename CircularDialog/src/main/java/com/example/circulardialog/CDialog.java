@@ -171,14 +171,10 @@ public class CDialog extends CommonDialog {
     }
 
     /**
-     * Creates a Alert circular dialog.
-     *
-     * @param message   Message to be displayed.
-     * @param alertType Type of alert (SUCCESS/WARNING/ERROR)
+     * Set the internal circular dialog size.
      * @param givenSize Size of alert (MEDIUM/LARGE)
-     * @return Returns the CDialog object for continuous operations.
      */
-    public CDialog createAlert(String message, int alertType, int givenSize) {
+    private void setCircularDialogSize(int givenSize) {
         switch (givenSize) {
             case MEDIUM:
                 try {
@@ -197,6 +193,18 @@ public class CDialog extends CommonDialog {
                 }
                 break;
         }
+    }
+
+    /**
+     * Creates a Alert circular dialog.
+     *
+     * @param message   Message to be displayed.
+     * @param alertType Type of alert (SUCCESS/WARNING/ERROR)
+     * @param givenSize Size of alert (MEDIUM/LARGE)
+     * @return Returns the CDialog object for continuous operations.
+     */
+    public CDialog createAlert(String message, int alertType, int givenSize) {
+        setCircularDialogSize(givenSize);
 
         dialog.setComponentSize(size, size);
         messageText.setText(message);
@@ -216,24 +224,7 @@ public class CDialog extends CommonDialog {
      * @return Returns the CDialog object for continuous operations.
      */
     public CDialog createAlert(String message, PixelMap icon, int alertType, int givenSize) {
-        switch (givenSize) {
-            case MEDIUM:
-                try {
-                    size = context.getResourceManager().getElement(ResourceTable.Integer_medium_dialog).getInteger();
-                } catch (IOException | NotExistException | WrongTypeException e) {
-                    HiLog.error(LABEL_LOG, e.getMessage());
-                }
-                break;
-
-            case LARGE:
-            default:
-                try {
-                    size = context.getResourceManager().getElement(ResourceTable.Integer_large_dialog).getInteger();
-                } catch (IOException | NotExistException | WrongTypeException e) {
-                    HiLog.error(LABEL_LOG, e.getMessage());
-                }
-                break;
-        }
+        setCircularDialogSize(givenSize);
 
         dialog.setComponentSize(size, size);
         messageText.setText(message);
