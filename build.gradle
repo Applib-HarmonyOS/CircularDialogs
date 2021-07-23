@@ -37,15 +37,12 @@ allprojects {
         maven {
             url 'https://mirrors.huaweicloud.com/repository/maven/'
         }
-        maven {
-            url 'https://developer.huawei.com/repo/'
-        }
         jcenter()
     }
     
     task checkstyle(type: Checkstyle) {
        showViolations = true
-       configFile file("huawei/config/checkstyle.xml")
+       configFile file("config/checkstyle.xml")
   
        source 'entry/src/main/java'
        source 'CircularDialog/src/main/java'
