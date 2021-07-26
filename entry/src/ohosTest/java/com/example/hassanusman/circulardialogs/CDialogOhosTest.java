@@ -8,6 +8,8 @@ import ohos.agp.colors.RgbColor;
 import ohos.app.Context;
 import ohos.global.resource.NotExistException;
 import ohos.global.resource.WrongTypeException;
+import ohos.hiviewdfx.HiLog;
+import ohos.hiviewdfx.HiLogLabel;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -20,6 +22,7 @@ import static org.junit.Assert.assertEquals;
 public class CDialogOhosTest {
     private final Context context = AbilityDelegatorRegistry.getAbilityDelegator().getAppContext();
     private final CDialog cDialog = new CDialog(context);
+    private static final HiLogLabel LABEL_LOG = new HiLogLabel(3, 0xD001100, "CDialogOhosTest");
 
     /**
      * Test for bundle name.
@@ -59,7 +62,7 @@ public class CDialogOhosTest {
         try {
             textSize = context.getResourceManager().getElement(ResourceTable.Integer_large_text).getInteger();
         } catch (IOException | NotExistException | WrongTypeException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
 
         assertEquals(textSize, cDialog.getMessageText().getTextSize());
@@ -130,7 +133,7 @@ public class CDialogOhosTest {
         try {
             size = context.getResourceManager().getElement(ResourceTable.Integer_medium_dialog).getInteger();
         } catch (IOException | NotExistException | WrongTypeException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
 
         assertEquals(size, cDialog.getWidth());
@@ -146,7 +149,7 @@ public class CDialogOhosTest {
         try {
             color = context.getResourceManager().getElement(ResourceTable.Color_colorSuccess).getColor();
         } catch (IOException | NotExistException | WrongTypeException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
 
         assertEquals(RgbColor.fromArgbInt(color), cDialog.getBackgroundColor());
@@ -171,7 +174,7 @@ public class CDialogOhosTest {
         try {
             color = context.getResourceManager().getElement(ResourceTable.Color_colorError).getColor();
         } catch (IOException | NotExistException | WrongTypeException e) {
-            e.printStackTrace();
+            HiLog.error(LABEL_LOG, e.getMessage());
         }
 
         assertEquals(RgbColor.fromArgbInt(color), cDialog.getBackgroundColor());
