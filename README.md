@@ -10,25 +10,28 @@ CircularDialogs is custom Android dialog library to give user feedback about the
 
 ## Add Gradle dependency 
 
-Add it in your root build.gradle at the end of repositories:
-
-
+1. For using CircularDialogs module in sample app, include the source code and add the below dependencies in entry/build.gradle to generate hap/support.har.
 ```
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	dependencies {
+		implementation project(':circulardialog')
+        	implementation fileTree(dir: 'libs', include: ['*.har'])
+        	testCompile 'junit:junit:4.12'
+	}
+```
+2. For using CircularDialogs in separate application using har file, add the har file in the entry/libs folder and add the dependencies in entry/build.gradle file.
+```
+	dependencies {
+		implementation fileTree(dir: 'libs', include: ['*.har'])
+		testCompile 'junit:junit:4.12'
 	}
 
 ```
-Add the dependency
-
+3. For using CircularDialogs from a remote repository in separate application, add the below dependencies in entry/build.gradle file.
 ```
-  dependencies {
-	        compile 'com.github.hassanusman:CircularDialogs:1.2'
+	dependencies {
+		implementation 'dev.applibgroup:circulardialog:1.0.0'
+		testCompile 'junit:junit:4.12'
 	}
-  
 ```
 
 ### Example
