@@ -89,9 +89,10 @@ public class MainAbilitySlice extends AbilitySlice {
             HiLog.error(LABEL_LOG, e.getMessage());
         }
         ImageSource.SourceOptions options = new ImageSource.SourceOptions();
-        options.formatHint = "image/png";
         ImageSource.DecodingOptions decodingOptions = new ImageSource.DecodingOptions();
-        decodingOptions.desiredSize = new Size(110, 110);
+
+        options.formatHint = "image/png";
+        decodingOptions.desiredSize = new Size(100, 100);
         Resource asset = null;
         try {
             assert assetManager != null;
