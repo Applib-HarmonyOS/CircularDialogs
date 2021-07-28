@@ -1,4 +1,4 @@
-# CircularDialogs [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=applibgroup_CircularDialogs&metric=alert_status)](https://sonarcloud.io/dashboard?id=applibgroup_CircularDialogs)
+# CircularDialogs [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=applibgroup_CircularDialogs&metric=alert_status)](https://sonarcloud.io/dashboard?id=applibgroup_CircularDialogs) [![Build](https://github.com/applibgroup/CircularDialogs/actions/workflows/main.yml/badge.svg)](https://github.com/applibgroup/CircularDialogs/actions/workflows/main.yml)
 
 CircularDialogs is custom Android dialog library to give user feedback about the common operations like Success, Warning and Errors. You can easily use the it by adding the dependency to your gradle file. It allows you to make beautiful dialogs with just few lines of code. You can choose from the predefined entry and exit animations. You can use lot of options as discussed below:
 
