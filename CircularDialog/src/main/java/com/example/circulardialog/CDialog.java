@@ -554,15 +554,6 @@ public class CDialog extends CommonDialog {
                 destroy();
             }
 
-            @Override
-            public void onCancel(Animator animator) {
-                // No action.
-            }
-
-            @Override
-            public void onEnd(Animator animator) {
-                // No action.
-            }
 
             @Override
             public void onPause(Animator animator) {
@@ -571,6 +562,16 @@ public class CDialog extends CommonDialog {
 
             @Override
             public void onResume(Animator animator) {
+                // No action.
+            }
+
+            @Override
+            public void onCancel(Animator animator) {
+                // No action.
+            }
+
+            @Override
+            public void onEnd(Animator animator) {
                 // No action.
             }
         });
