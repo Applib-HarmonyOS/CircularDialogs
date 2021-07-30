@@ -4,10 +4,11 @@ CircularDialogs is custom dialog library to give user feedback about the common 
 
 ## Screenshots
 
-<img src="Screenshot_success.png" width="250" height="500" title="success">
-<img src="Screenshot_error.png" width="250" height="500" title="error">
-<img src="Screenshot_warning.png" width="250" height="500" title="warning">
-
+<p align="center">
+<img src="Screenshot_success.png" width="280" height="560" title="success">
+<img src="Screenshot_error.png" width="280" height="560" title="error">
+<img src="Screenshot_warning.png" width="280" height="560" title="warning">
+</p>
 
 ## Source
 
