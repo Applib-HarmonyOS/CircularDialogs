@@ -90,7 +90,3 @@ You can use your own icons if you want. Here is the way :
 ```
     CDialog createAlert(String message, PixelMap icon, int alertType, int size); 
 ```
-
-## Maintainer
-
-[![HassanUsman](https://avatars0.githubusercontent.com/u/10232094?v=4&s=40) HassanUsman](https://github.com/HassanUsman)
