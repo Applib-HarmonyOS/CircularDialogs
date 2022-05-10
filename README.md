@@ -88,7 +88,7 @@ Right now only three types of dialogs are supported `CDConstants.SUCCESS`, `CDCo
 You can use your own icons if you want. Here is the way :
 
 ```
-    CDialog createAlert(String message, PixelMap icon, int alertType, int size); 
+    CDialog createAlert(String message, PixelMap icon, int alertType, int size); !
 ```
 
 ## Maintainer
